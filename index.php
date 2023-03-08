@@ -40,7 +40,7 @@ add_action('rest_api_init', function () {
       'methods' => 'POST',
       'callback' => 'fsdapikey_fetch_external_api_data',
       'permission_callback' => function(){
-        return current_user_can( 'edit_theme_options' );
+        return current_user_can( 'edit_posts' );
       }
   ));
 });

@@ -4,21 +4,23 @@
 function fsdapikey_fetch_external_api_data($req) {
 
   $example_value = $req["exampleValue"];
-  $test_mode = $req["testMode"];
 
-  $data_encryption = new fsdapikey_Data_Encryption();
+
+  $data_encryption = new FSD_Data_Encryption();
   $api_key = $data_encryption->decrypt(get_option( 'our_api_key' ));
 
   if(empty($api_key)){
     return new WP_Error( 'error', 'Please enter an API key in settings to use this feature', array( 'status' => 403 ) );
   }
 
-  if($test_mode){
-    $res = new WP_REST_Response("Your API key is: {$api_key}");
-    $res->set_status(200);
+  // You can enable this to test the API is properly stored. DO NOT leave this uncommented on production
+  // $test_mode = $req["testMode"];
+  // if($test_mode){
+  //   $res = new WP_REST_Response("Your API key is: {$api_key}");
+  //   $res->set_status(200);
   
-    return $res;
-  }
+  //   return $res;
+  // }
 
   $curl = curl_init();
 

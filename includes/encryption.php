@@ -6,7 +6,7 @@
 /**
  * Class responsible for encrypting and decrypting data.
  */
-class fsdapikey_Data_Encryption {
+class FSD_Data_Encryption {
 
 	/**
 	 * Key to use for encryption.

@@ -16,7 +16,7 @@ function fsdapikey_add_api_keys_callback() { ?>
 
     <?php
 
-      $data_encryption = new fsdapikey_Data_Encryption();
+      $data_encryption = new FSD_Data_Encryption();
       $api_key = get_option('our_api_key');
 
       if($api_key){
@@ -52,30 +52,6 @@ function fsdapikey_add_api_keys_callback() { ?>
             <input type="submit" name="submit" id="submit" class="update-button button button-primary" value="Update API Key"  />
         </form> 
 
-        <button id="api-test" style="margin-top: 32px;">
-          Test API Route and Return API key
-        </button>
-
-        <script>
-          
-          async function testApi(){
-            const res = await fetch("<?php echo home_url( ); ?>/wp-json/fsd/v1/fetch-external-api", {
-              method: "POST",
-              headers: {
-                "X-WP-Nonce": "<?php echo wp_create_nonce( 'wp_rest' ) ?>",
-                "Content-Type": "application/json"
-              },
-              body: JSON.stringify({
-                testMode: true
-              })
-            });
-            const data = await res.json()
-            alert(data)
-          }
-
-          document.getElementById('api-test').addEventListener('click', testApi)
-
-        </script>
     </div>
     <?php
 }
@@ -94,7 +70,7 @@ function fsdapikey_submit_api_key() {
 
     if (isset($_POST['our_api_key'])) {
 
-        $data_encryption = new fsdapikey_Data_Encryption();
+        $data_encryption = new FSD_Data_Encryption();
         $submitted_api_key = sanitize_text_field( $_POST['our_api_key'] );
         $api_key = $data_encryption->encrypt($submitted_api_key);
 
