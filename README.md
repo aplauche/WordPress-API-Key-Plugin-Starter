@@ -13,12 +13,15 @@ The current API request from the REST endpoint handler is for demo purposes only
 An example request to use the API would look like this:
 
 ```
+<script>
   async function useExternalApi(){
     const res = await fetch("<?php echo home_url( ); ?>/wp-json/fsd/v1/fetch-external-api", {
       method: "POST",
       headers: {
-        "X-WP-Nonce": "<?php echo wp_create_nonce( 'wp_rest' ) ?>",
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        // Only needed if your permission callback is something other than __return_true
+        // If using in javascript file you may need to use localize_script to get access to the nonce rather than dropping into php
+        "X-WP-Nonce": "<?php echo wp_create_nonce( 'wp_rest' ) ?>"      
       },
       body: JSON.stringify({
         exampleValue: "example"
@@ -28,4 +31,5 @@ An example request to use the API would look like this:
     console.log(data)
     // Do something with the data ...
   }
+  </script>
 ```
